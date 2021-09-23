@@ -158,12 +158,12 @@
     </link>
 
     <!--suporte_joint--> 
-    <joint name="suporte_joint" type="fixed">
+    <joint name="suporte_joint" type="revolute">
       <origin xyz="0.04525 0 0.0285" rpy="0 0 0" />
       <parent link="${parent}" />
       <child link="suporte_link" />
-      <axis xyz="0 0 0" />
-      <limit lower="0" upper="0" effort="0" velocity="0" />
+      <axis xyz="0 1 0" />
+      <limit lower="0.0" upper="1.57" effort="100" velocity="100" />
     </joint>
   </xacro:macro>
 

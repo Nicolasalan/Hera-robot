@@ -1,0 +1,18 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/robofei/Workspace/catkin_hera/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/robofei/Workspace/catkin_hera/src/navigation_system/eband_local_planner/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ],
+  "version": 4
+}
