@@ -3,14 +3,18 @@
 
   <arg name="robot_model"            default="hera_full"/>
   <arg name="robot_name"             default="robot"/>
+  
 
   <arg name="enable_rviz"            default="true"/>
   <arg name="enable_gazebo"          default="true"/>
   <arg name="enable_teleop"          default="true"/>
-  <arg name="enable_check_collision" default="true"/>
-  <arg name="camera_controller" default="false" />
+  <arg name="enable_check_collision" default="false"/>
 
-  <!-- Coisas para randomizar o mapa -->
+  <!-- Task evaluator args -->
+  <arg name="task_evaluator" default="false" />
+  <arg name="camera_controller" default="true" />
+  <!-- Randomization args -->
+  <arg name="spawn_objects" default="true"/>
   <arg name="seed" default="1" />
   <arg name="per_category" default="6" />
   <arg name="obstacles" default="4" />
@@ -63,16 +67,18 @@
   </group>
 
   <!-- spawn objects to the world -->
-  <node pkg="tmc_wrs_gazebo_worlds" type="spawn_objects" name="spawn_objects" args="--seed $(arg seed) --percategory $(arg per_category) --obstacles $(arg obstacles) --perrow $(arg per_row)" output="screen" />
-   
-  <!-- Inicialização do Score -->
-  <node pkg="tmc_gazebo_task_evaluators" type="setup_score_widget" name="setup_score_widget"/>
-
-  <!-- task evaluators -->
-  <include file="$(find tmc_gazebo_task_evaluators)/launch/robocup2021.launch">
-    <arg name="robot_name" value="$(arg robot_name)"/>
-    <arg name="camera_controller" value="$(arg camera_controller)"/>
-  </include>
+  <group if="$(arg spawn_objects)">
+    <node pkg="tmc_wrs_gazebo_worlds" type="spawn_objects" name="spawn_objects" args="--seed $(arg seed) --percategory $(arg per_category) --obstacles $(arg obstacles) --perrow $(arg per_row)" output="screen" />
+  </group> 
+  <!-- task evaluator -->
+  <group if="$(arg task_evaluator)">
+    <node pkg="tmc_gazebo_task_evaluators" type="setup_score_widget" name="setup_score_widget"/>
+    
+    <include file="$(find tmc_gazebo_task_evaluators)/launch/robocup2021.launch">
+      <arg name="robot_name" value="$(arg robot_name)"/>
+      <arg name="camera_controller" value="$(arg camera_controller)"/>
+    </include>
+  </group>
 
 </launch>
 
