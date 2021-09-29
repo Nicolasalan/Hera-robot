@@ -84,7 +84,7 @@
   </xacro:kinect_one>
 
   <!--torso suporte-->
-  <xacro:create_suporte_link
+  <xacro:create_support_link
     parent="torso"/>
 
   <!--torso encosto-->

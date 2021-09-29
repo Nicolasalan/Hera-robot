@@ -136,20 +136,20 @@
       </actuator>
     </transmission>
 
-  <!--##################### SUPORT ########################-->
+  <!--##################### support ########################-->
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-        <robotNamespace>/suport</robotNamespace>
+        <robotNamespace>/support</robotNamespace>
         <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
         </plugin>
     </gazebo>
     
-    <transmission name="trans_suport">
+    <transmission name="trans_support">
       <type>transmission_interface/SimpleTransmission</type>
-      <joint name="suporte_joint">
+      <joint name="support_joint">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
-      <actuator name="suporte_joint_motor">
+      <actuator name="support_joint_motor">
         <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
         <mechanicalReduction>1</mechanicalReduction>
       </actuator>

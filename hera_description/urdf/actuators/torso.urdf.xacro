@@ -136,13 +136,13 @@
   </xacro:macro>
 
 
-  <!--suporte_link-->
-  <xacro:macro name="create_suporte_link" params="parent">
-    <link name="suporte_link">
+  <!--support_link-->
+  <xacro:macro name="create_support_link" params="parent">
+    <link name="support_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://hera_description/meshes/manip_meshes/suporte_link.STL"/>
+          <mesh filename="package://hera_description/meshes/manip_meshes/support_link.STL"/>
         </geometry>
         <material name="grey">
           <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -151,17 +151,17 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://hera_description/meshes/manip_meshes/suporte_link.STL"/>
+          <mesh filename="package://hera_description/meshes/manip_meshes/support_link.STL"/>
         </geometry>
       </collision>
-      <xacro:inertial_suporte_link mass="0.659217140679788"/>
+      <xacro:inertial_support_link mass="0.659217140679788"/>
     </link>
 
-    <!--suporte_joint--> 
-    <joint name="suporte_joint" type="revolute">
+    <!--support_joint--> 
+    <joint name="support_joint" type="revolute">
       <origin xyz="0.04525 0 0.0285" rpy="0 0 0" />
       <parent link="${parent}" />
-      <child link="suporte_link" />
+      <child link="support_link" />
       <axis xyz="0 1 0" />
       <limit lower="0.0" upper="1.57" effort="100" velocity="100" />
     </joint>

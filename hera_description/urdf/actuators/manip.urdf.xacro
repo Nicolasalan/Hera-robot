@@ -27,7 +27,7 @@
   <!--base_joint-->
     <joint name="base_joint" type="fixed">
       <origin xyz="0.27075 0 0.0295" rpy="0 0 0" />
-      <parent link="suporte_link" />
+      <parent link="support_link" />
       <child link="base_link" />
       <axis xyz="0 0 0" />
       <limit lower="0" upper="0" effort="0" velocity="0" />

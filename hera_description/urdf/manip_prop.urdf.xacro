@@ -118,8 +118,8 @@
         </inertial>
     </xacro:macro>
 
-<!--inertial_suporte_link-->
-    <xacro:macro name="inertial_suporte_link" params="mass">
+<!--inertial_support_link-->
+    <xacro:macro name="inertial_support_link" params="mass">
         <inertial>
             <origin xyz="0.099437810671345 2.00188811166901E-07 0.0198713294048926" rpy="0 0 0" />
             <mass value="${mass}" />
