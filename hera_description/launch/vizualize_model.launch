@@ -3,10 +3,10 @@
 
   <arg name="robot_model"            default="hera_full"/>
   <arg name="robot_name"             default="robot"/>
-  
 
   <arg name="enable_rviz"            default="true"/>
   <arg name="enable_gazebo"          default="true"/>
+  <arg name="enable_controllers"     default="true"/>
   <arg name="enable_teleop"          default="true"/>
   <arg name="enable_check_collision" default="false"/>
 
@@ -42,6 +42,12 @@
       <arg name="use_jsp_gui" default="false"/>
     </include>
   </group>
+
+  <group if="$(arg enable_controllers)">
+    <include file="$(find hera_description)/launch/support_controller.launch"/>
+    <include file="$(find hera_description)/launch/kinect_controller.launch"/>
+  </group>
+
 
   <!-- not use gazebo -->
   <group unless="$(arg enable_gazebo)">
