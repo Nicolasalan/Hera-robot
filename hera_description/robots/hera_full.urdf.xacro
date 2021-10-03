@@ -131,7 +131,7 @@
   <xacro:gazebo_manip/>
 
   <!-- gripper_contact_sensors -->
-  <xacro:gripper_contact_sensors/>
+  <!-- <xacro:gripper_contact_sensors/> -->
 
 <!-- ####################################################################### -->
 <!-- ####################### gazebo sensors #################################-->

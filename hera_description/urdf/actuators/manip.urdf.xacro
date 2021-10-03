@@ -3,7 +3,9 @@
 
 <xacro:include filename="$(find hera_description)/urdf/manip_prop.urdf.xacro"/>
 <xacro:include filename="$(find hera_description)/urdf/simulation/manip_transmission.xacro"/>
-<xacro:include filename="$(find hera_description)/urdf/actuators/gripper/robotiq-3f-gripper_articulated_macro.xacro"/>
+<!-- <xacro:include filename="$(find hera_description)/urdf/actuators/gripper/robotiq-3f-gripper_articulated_macro.xacro"/> -->
+<xacro:include filename="$(find pal_gripper_description)/urdf/gripper.urdf.xacro" />
+
 
 <!--base_link-->
   <xacro:macro name="create_base_link">
@@ -257,7 +259,10 @@
     <xacro:create_link_6/>
 
     <!-- Gripper -->
-    <xacro:robotiq-3f-gripper_articulated prefix=""/>
+    <!-- <xacro:robotiq-3f-gripper_articulated prefix=""/> -->
+    <xacro:pal_gripper parent="link_6" name="gripper">
+      <origin xyz="0.06 0 0" rpy="0 -1.57 0" />
+    </xacro:pal_gripper>
 
     <!--Transmission-->
     <xacro:manip_transmission/>
