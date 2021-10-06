@@ -6,22 +6,8 @@
 
   <arg name="enable_rviz"            default="true"/>
   <arg name="enable_gazebo"          default="true"/>
-  <arg name="enable_controllers"     default="true"/>
   <arg name="enable_teleop"          default="true"/>
-  <arg name="enable_check_collision" default="false"/>
-
-  <!-- Task evaluator args -->
-  <arg name="task_evaluator" default="false" />
-  <arg name="camera_controller" default="true" />
-  <!-- Randomization args -->
-  <arg name="spawn_objects" default="true"/>
-  <arg name="seed" default="1" />
-  <arg name="per_category" default="6" />
-  <arg name="obstacles" default="4" />
-  <arg name="per_row" default="6" />
-  
-  <param name="/use_sim_time" value="true"/>
-  <param name="gazebo/enable_ros_network" value="true" />
+  <arg name="enable_check_collision" default="true"/>
 
   <!-- use rviz -->
   <group if="$(arg enable_rviz)">
@@ -30,11 +16,9 @@
   </group>
 
   <!-- use gazebo -->
-  <env name="GAZEBO_MODEL_PATH" value="$GAZEBO_MODEL_PATH:$(find social_worlds)/models/:$(find social_worlds)/models/3dparty/"/>
   <group if="$(arg enable_gazebo)">
     <!-- gazebo -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
-    <!-- <include file="$(find tmc_wrs_gazebo_worlds)/worlds/wrs2020.world"/> -->
     <!-- load hera description -->
     <include file="$(find hera_description)/launch/load_description.launch">
       <arg name="robot_model" default="$(arg robot_model)"/>
@@ -42,12 +26,6 @@
       <arg name="use_jsp_gui" default="false"/>
     </include>
   </group>
-
-  <group if="$(arg enable_controllers)">
-    <include file="$(find hera_description)/launch/support_controller.launch"/>
-    <include file="$(find hera_description)/launch/kinect_controller.launch"/>
-  </group>
-
 
   <!-- not use gazebo -->
   <group unless="$(arg enable_gazebo)">
@@ -72,19 +50,4 @@
     </node>
   </group>
 
-  <!-- spawn objects to the world -->
-  <group if="$(arg spawn_objects)">
-    <node pkg="tmc_wrs_gazebo_worlds" type="spawn_objects" name="spawn_objects" args="--seed $(arg seed) --percategory $(arg per_category) --obstacles $(arg obstacles) --perrow $(arg per_row)" output="screen" />
-  </group> 
-  <!-- task evaluator -->
-  <group if="$(arg task_evaluator)">
-    <node pkg="tmc_gazebo_task_evaluators" type="setup_score_widget" name="setup_score_widget"/>
-    
-    <include file="$(find tmc_gazebo_task_evaluators)/launch/robocup2021.launch">
-      <arg name="robot_name" value="$(arg robot_name)"/>
-      <arg name="camera_controller" value="$(arg camera_controller)"/>
-    </include>
-  </group>
-
 </launch>
-

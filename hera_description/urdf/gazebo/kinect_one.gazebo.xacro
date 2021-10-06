@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-      
+
     <xacro:macro name="gazebo_kinect_one" params="reference update_rate">
 
         <gazebo reference="${reference}">
@@ -14,8 +14,8 @@
                 <horizontal_fov>${60 * M_PI/180.0}</horizontal_fov>
                 <image>
                   <format>R8G8B8</format>
-                  <width>${1280}</width>
-                  <height>${720}</height>
+                  <width>${640}</width>
+                  <height>${480}</height>
                 </image>
                 <clip>
                     <near>0.4</near>
@@ -53,13 +53,5 @@
 
           </sensor>
         </gazebo>
-
-        <gazebo>
-            <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-            <robotNamespace>/kinect</robotNamespace>
-            <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-            </plugin>
-        </gazebo>
-        
     </xacro:macro>
   </robot>
