@@ -2,6 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="hera_description">
 
 <xacro:include filename="$(find hera_description)/urdf/actuators/manipulator/manip_prop.urdf.xacro"/>
+<xacro:include filename="$(find hera_description)/urdf/actuators/manipulator/simulation_gripper/gripper.urdf.xacro" />
 
 <!--manip_base_link-->
   <xacro:macro name="create_manip_base_link">
@@ -364,19 +365,21 @@
     <xacro:create_wrist_lift_link/>
 
     <!--gripper_left_link-->
-    <xacro:create_gripper_left_link/>
+    <!-- <xacro:create_gripper_left_link/> -->
     
     <!--gripper_left_end_link-->
-    <xacro:create_gripper_left_end_link/>
+    <!-- <xacro:create_gripper_left_end_link/> -->
     
     <!--gripper_right_link-->
-    <xacro:create_gripper_right_link/>
+    <!-- <xacro:create_gripper_right_link/> -->
     
     <!--gripper_right_end_link-->
-    <xacro:create_gripper_right_end_link/>
+    <!-- <xacro:create_gripper_right_end_link/> -->
 
-   
-  
+    <!-- simulation_gripper -->
+    <xacro:pal_gripper parent="wrist_lift_link" name="gripper">
+      <origin xyz="0.055 0 0" rpy="0 -1.57 0" />
+    </xacro:pal_gripper>
+
   </xacro:macro>
-
 </robot>

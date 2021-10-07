@@ -40,6 +40,7 @@
   <group if="$(arg enable_teleop)" >
     <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
       output="screen" launch-prefix="xterm -hold -e"/>
+    <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" />
   </group>
 
   <!-- check collision -->
