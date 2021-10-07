@@ -1,0 +1,382 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="hera_description">
+
+<xacro:include filename="$(find hera_description)/urdf/actuators/manipulator/manip_prop.urdf.xacro"/>
+
+<!--manip_base_link-->
+  <xacro:macro name="create_manip_base_link">
+    <link name="manip_base_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/manip_base.STL"/>
+        </geometry>
+        <material name="dark_grey">        
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/manip_base_col.STL"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_manip_base_link mass="0.225814419604843"/>
+    </link>
+  <!--manip_base_joint-->
+    <joint name="manip_base_joint" type="fixed">
+      <origin xyz="0.27075 0 0.0295" rpy="0 0 0" />
+      <parent link="manip_support_link" />
+      <child link="manip_base_link" />
+      <axis xyz="0 0 0" />
+      <limit lower="0" upper="0" effort="0" velocity="0" />
+    </joint>
+  </xacro:macro>
+
+<!--link_1: shoulder_pan-->
+  <xacro:macro name="create_shoulder_pan_link">
+    <link name="shoulder_pan_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/shoulder_pan.STL"/>
+        </geometry>
+        <material name="dark_grey">
+          <color rgba="0.996078431372549 0.996078431372549 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/shoulder_pan_col.STL"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_shoulder_pan_link mass="0.0289102664622999"/>
+    </link>
+
+    <!--joint_1: shoulder_pan_joint-->
+    <joint name="shoulder_pan_joint" type="revolute">
+      <origin xyz="0.0155 0 0.04515" rpy="0 0 0" />
+      <parent link="manip_base_link" />
+      <child link="shoulder_pan_link" />
+      <axis xyz="0 0 1" />
+      <limit lower="-3.14" upper="3.14" effort="0" velocity="5" />
+    </joint>
+  </xacro:macro>
+
+<!--link_2: shoulder_lift_link-->
+  <xacro:macro name="create_shoulder_lift_link">
+    <link name="shoulder_lift_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/shoulder_lift.STL"/>
+        </geometry>
+        <material name="dark_grey">
+          <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/shoulder_lift_col.STL"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_shoulder_lift_link mass="0.611796741662792"/>
+    </link>
+
+    <!--joint_2: shoulder_lift_joint--> 
+    <joint name="shoulder_lift_joint" type="revolute">
+      <origin xyz="0.048 0 0.02285" rpy="3.1416 -1.1781 -3.1416" />
+      <parent link="shoulder_pan_link" />
+      <child link="shoulder_lift_link" />
+      <axis xyz="0 1 0" />
+      <limit lower="-1.0847" upper="3.14" effort="0" velocity="5" />
+    </joint>
+  </xacro:macro>
+
+<!--link_3: elbow_pan_link-->
+  <xacro:macro name="create_elbow_pan_link">
+    <link name="elbow_pan_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/elbow_pan.STL"/>
+        </geometry>
+        <material name="dark_grey">
+          <color rgba="0.996078431372549 0.996078431372549 1 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/elbow_pan_col.STL"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_elbow_pan_link mass="0.0289102660424069"/>
+    </link>
+
+    <!--joint_3: elbow_pan_joint-->  
+    <joint name="elbow_pan_joint" type="revolute">
+      <origin xyz="0.1439 0 0" rpy="0 0 0" />
+      <parent link="shoulder_lift_link" />
+      <child link="elbow_pan_link" />
+      <axis xyz="1 0 0" />
+      <limit lower="-3.14" upper="3.14" effort="0" velocity="5" />
+    </joint>
+  </xacro:macro>
+
+<!--link_4: elbow_lift_link-->
+  <xacro:macro name="create_elbow_lift_link">
+    <link name="elbow_lift_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/elbow_lift.STL"/>
+        </geometry>
+        <material name="dark_grey">
+          <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/elbow_lift_col.STL"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_elbow_lift_link mass="0.611796742118779"/>
+    </link>
+
+    <!--joint_4: elbow_lift_joint-->
+    <joint name="elbow_lift_joint" type="revolute">
+      <origin xyz="0.02285 0 -0.048" rpy="0 -0.3927 0" />
+      <parent link="elbow_pan_link" />
+      <child link="elbow_lift_link" />
+      <axis xyz="0 -1 0" />
+      <limit lower="-3.14" upper="1.0078" effort="0" velocity="5" />
+    </joint>
+  </xacro:macro>
+
+<!--link_5: wrist_pan_link-->
+  <xacro:macro name="create_wrist_pan_link">
+    <link name="wrist_pan_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh  filename="package://hera_description/meshes/manip_meshes/wrist_pan.STL" />
+        </geometry>
+        <material name="dark_grey">
+          <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/wrist_pan_col.STL" />
+        </geometry>
+      </collision> 
+      <xacro:inertial_wrist_pan_link mass="0.0368976416562371"/>
+    </link>
+
+    <!--joint_5: wrist_pan_joint--> 
+    <joint name="wrist_pan_joint" type="revolute">
+      <origin xyz="0.1439 0 0" rpy="0 0 0" />
+      <parent link="elbow_lift_link" />
+      <child link="wrist_pan_link" />
+      <axis xyz="1 0 0" />
+      <limit lower="-3.14" upper="3.14" effort="0" velocity="5" />
+    </joint>
+  </xacro:macro>
+
+<!--link_6: wrist_lift_link-->
+  <xacro:macro name="create_wrist_lift_link">
+    <link name="wrist_lift_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh  filename="package://hera_description/meshes/manip_meshes/wrist_lift.STL" />
+        </geometry>
+        <material name="dark_grey">
+          <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1"/>
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/wrist_lift_col.STL" />
+        </geometry>
+        </collision>
+        <xacro:inertial_wrist_lift_link mass="0.482627734525522"/> 
+    </link>
+
+    <!--joint_6: wrist_lift_joint-->
+    <joint name="wrist_lift_joint" type="revolute">
+      <origin xyz="0.03885 0 0" rpy="0 1.57 0" />
+      <parent link="wrist_pan_link" />
+      <child link="wrist_lift_link" />
+      <axis xyz="0 -1 0" />
+      <limit lower="-2.6232" upper="1.8262" effort="0" velocity="5" />
+    </joint>
+  </xacro:macro>
+
+<!--link_7: gripper_right_link-->
+  <xacro:macro name="create_gripper_right_link">
+    <link name="gripper_right_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/gripper_meshes/gripper_right.STL"/>
+        </geometry>
+        <material name="dark_grey">
+          <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/gripper_meshes/gripper_right_col.STL"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_gripper_right_link mass="0.0392347304267543"/>
+    </link>
+
+    <!--joint_7: gripper_right_joint-->
+    <joint name="gripper_right_joint" type="revolute">
+      <origin xyz="0.061 0.02125 0" rpy="0 0 0" />
+      <parent link="wrist_lift_link" />
+      <child  link="gripper_right_link" />
+      <axis xyz="0 0 1" />
+      <limit lower="-0.6454" upper="1.5600" effort="0" velocity="5" />
+    </joint>
+  </xacro:macro>
+
+<!--link_7_end: gripper_right_end_link-->
+  <xacro:macro name="create_gripper_right_end_link">
+    <link name="gripper_right_end_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/gripper_meshes/gripper_right_end.STL"/>
+        </geometry>
+        <material name="white">
+          <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/gripper_meshes/gripper_right_end.STL"/>
+        </geometry>
+      </collision>
+      <xacro:inertial_gripper_right_end_link mass="0.0535201883186937"/>
+    </link>
+
+    <!--joint_7_end: gripper_right_end_joint-->
+    <joint name="gripper_right_end_joint" type="fixed">
+      <origin xyz="0.066179 -0.02125 0" rpy="0 0 0" />
+      <parent link="gripper_right_link" />
+      <child link="gripper_right_end_link" />
+      <axis xyz="0 0 0" />
+    </joint>
+  </xacro:macro>
+
+<!--link_8: gripper_left_link-->
+  <xacro:macro name="create_gripper_left_link">
+    <link name="gripper_left_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/gripper_meshes/gripper_left.STL" />
+        </geometry>
+        <material name="dark_grey">
+          <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/gripper_meshes/gripper_left.STL" />
+        </geometry>
+      </collision>
+      <xacro:inertial_gripper_left_link mass="0.0392347308783591"/>
+    </link>
+
+    <!--joint_8: gripper_left_joint-->
+    <joint name="gripper_left_joint" type="revolute">
+      <origin xyz="0.061 -0.02125 0" rpy="0 0 0" />
+      <parent link="wrist_lift_link" />
+      <child link="gripper_left_link" />
+      <axis xyz="0 0 1" />
+      <limit lower="-1.5600" upper="0.6454" effort="0" velocity="5" />
+    </joint>
+  </xacro:macro>
+
+<!--link_8_end: gripper_left_end_link-->
+  <xacro:macro name="create_gripper_left_end_link">
+    <link name="gripper_left_end_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/gripper_meshes/gripper_left_end.STL" />
+        </geometry>
+        <material name="white">
+          <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
+        </material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://hera_description/meshes/manip_meshes/gripper_meshes/gripper_left_end.STL" />
+        </geometry>
+      </collision>
+      <xacro:inertial_gripper_left_end_link mass="0.0535202013033793"/>
+    </link>
+
+    <!--joint_8_end: gripper_left_end_joint-->
+    <joint name="gripper_left_end_joint" type="fixed">
+      <origin xyz="0.0661786041848968 0.0212499999999973 0" rpy="0 0 0" />
+      <parent link="gripper_left_link" />
+      <child link="gripper_left_end_link" />
+      <axis xyz="0 0 0" />
+    </joint>
+  </xacro:macro>
+
+  <xacro:macro name="manipulator">
+
+    <!--manip_base_link-->
+    <xacro:create_manip_base_link/>
+    
+    <!--shoulder_pan_link-->
+    <xacro:create_shoulder_pan_link/>
+
+    <!--shoulder_lift_link-->
+    <xacro:create_shoulder_lift_link/>
+
+    <!--elbow_pan-->
+    <xacro:create_elbow_pan_link/>
+
+    <!--elbow_lift_link-->
+    <xacro:create_elbow_lift_link/>
+
+    <!--wrist_pan_link-->
+    <xacro:create_wrist_pan_link/>
+
+    <!--wrist_lift_link-->
+    <xacro:create_wrist_lift_link/>
+
+    <!--gripper_left_link-->
+    <xacro:create_gripper_left_link/>
+    
+    <!--gripper_left_end_link-->
+    <xacro:create_gripper_left_end_link/>
+    
+    <!--gripper_right_link-->
+    <xacro:create_gripper_right_link/>
+    
+    <!--gripper_right_end_link-->
+    <xacro:create_gripper_right_end_link/>
+
+   
+  
+  </xacro:macro>
+
+</robot>

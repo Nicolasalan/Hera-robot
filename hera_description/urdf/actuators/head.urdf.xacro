@@ -67,16 +67,6 @@
       <limit effort="${head_effort}" velocity="${head_velocity}" lower="-${M_PI/2}" upper="${M_PI/2}"/>
     </joint>
 
-    <!-- <transmission name="tran_${name}">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="joint_${parent}_to_${name}">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="motor_${name}">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission> -->
 
   </xacro:macro>
 </robot>

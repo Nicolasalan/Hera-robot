@@ -24,7 +24,7 @@
   <xacro:property name="pole_size_y"       value="0.06"/>
   <xacro:property name="pole_size_z"       value="1.00"/>
 
-  <xacro:property name="sensor_plat_mass"             value="1.0"/>
+  <xacro:property name="sensor_plat_mass"             value="0.01"/>
   <xacro:property name="sensor_plat_size_x"           value="0.10"/>
   <xacro:property name="sensor_plat_size_y"           value="0.12"/>
   <xacro:property name="sensor_plat_size_z"           value="0.01"/>
@@ -112,37 +112,24 @@
     </joint>
 
     <!-- should be revolute -->
-    <joint name="joint_${name}_to_${name}_sensor_plat" type="revolute">
+
+    <joint name="joint_${name}_to_${name}_sensor_plat" type="fixed">
       <origin xyz="0.09 0 0.46" rpy="0 0 0"/> <!-- rpy="0 0 0" -->
       <parent link="${name}"/>
       <child link="${name}_sensor_plat"/>
-      <axis xyz="0 1 0"/> -->
-      <limit effort="${torso_sensor_plat_effort}" velocity="${torso_sensor_plat_velocity}"
-        lower="0.0" upper="1.57"/>
-    </joint>
 
-    <!-- Transmission to Gazebo Plugin -->
-    <transmission name="trans_kinect">
-      <type>transmission_interface/SimpleTransmission</type>
-      <joint name="joint_torso_to_torso_sensor_plat">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-      </joint>
-      <actuator name="kinect_motor">
-        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
-        <mechanicalReduction>1</mechanicalReduction>
-      </actuator>
-    </transmission>
+    </joint>
 
   </xacro:macro>
 
 
-  <!--suporte_link-->
-  <xacro:macro name="create_suporte_link" params="parent">
-    <link name="suporte_link">
+  <!--manip_support_link-->
+  <xacro:macro name="create_manip_support_link" params="parent">
+    <link name="manip_support_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://hera_description/meshes/manip_meshes/suporte_link.STL"/>
+          <mesh filename="package://hera_description/meshes/manip_meshes/manip_support.STL"/>
         </geometry>
         <material name="grey">
           <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
@@ -151,29 +138,29 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://hera_description/meshes/manip_meshes/suporte_link.STL"/>
+          <mesh filename="package://hera_description/meshes/manip_meshes/manip_support.STL"/>
         </geometry>
       </collision>
-      <xacro:inertial_suporte_link mass="0.659217140679788"/>
+      <xacro:inertial_manip_support_link mass="0.659217140679788"/>
     </link>
 
-    <!--suporte_joint--> 
-    <joint name="suporte_joint" type="fixed">
+    <!--manip_support_joint--> 
+    <joint name="manip_support_joint" type="fixed">
       <origin xyz="0.04525 0 0.0285" rpy="0 0 0" />
       <parent link="${parent}" />
-      <child link="suporte_link" />
+      <child link="manip_support_link" />
       <axis xyz="0 0 0" />
       <limit lower="0" upper="0" effort="0" velocity="0" />
     </joint>
   </xacro:macro>
 
-  <!--encosto_link-->
-  <xacro:macro name="create_encosto_link" params="parent">
-    <link name="encosto_link">
+  <!--backrest_link-->
+  <xacro:macro name="create_backrest_link" params="parent">
+    <link name="backrest_link">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://hera_description/meshes/manip_meshes/encosto_link.STL"/>
+          <mesh filename="package://hera_description/meshes/manip_meshes/backrest.STL"/>
         </geometry>
         <material name="grey">
           <color rgba="0.898039215686275 0.917647058823529 0.929411764705882 1" />
@@ -182,17 +169,17 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
         <geometry>
-          <mesh filename="package://hera_description/meshes/manip_meshes/encosto_link.STL"/>
+          <mesh filename="package://hera_description/meshes/manip_meshes/backrest.STL"/>
         </geometry>
       </collision>
-      <xacro:inertial_base_link mass="0.0709912944888601"/>
+      <xacro:inertial_backrest_link mass="0.0709912944888601"/>
     </link>
 
-    <!--encosto_joint-->
-    <joint name="encosto_joint" type="fixed">
+    <!--backrest_joint-->
+    <joint name="backrest_joint" type="fixed">
       <origin xyz="0.028 0.0066709 0.053" rpy="0 0 0" />
       <parent link="${parent}" />
-      <child link="encosto_link" />
+      <child link="backrest_link" />
       <axis xyz="0 0 0" />
       <limit effort="0" velocity="0" />
     </joint>
