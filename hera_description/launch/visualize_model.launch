@@ -18,7 +18,9 @@
   <!-- use gazebo -->
   <group if="$(arg enable_gazebo)">
     <!-- gazebo -->
-    <include file="$(find gazebo_ros)/launch/empty_world.launch"/>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">                                                    
+      <arg name="verbose" value="true" />
+    </include>
     <!-- load hera description -->
     <include file="$(find hera_description)/launch/load_description.launch">
       <arg name="robot_model" default="$(arg robot_model)"/>
@@ -40,7 +42,7 @@
   <group if="$(arg enable_teleop)" >
     <node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"
       output="screen" launch-prefix="xterm -hold -e"/>
-    <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" />
+    <!-- <node name="rqt_joint_trajectory_controller" pkg="rqt_joint_trajectory_controller" type="rqt_joint_trajectory_controller" /> -->
   </group>
 
   <!-- check collision -->
