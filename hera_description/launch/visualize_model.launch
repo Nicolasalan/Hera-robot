@@ -11,7 +11,7 @@
 
   <!-- use rviz -->
   <group if="$(arg enable_rviz)">
-    <node name="rviz" pkg="rviz" type="rviz" output="screen"
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" respawn="true"
       args="-d $(find hera_description)/config/rviz/visualize_model.rviz"/>
   </group>
 
