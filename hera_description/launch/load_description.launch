@@ -17,9 +17,11 @@
 
   <!-- Load joint controller configurations -->
   <rosparam file="$(find hera_control)/config/manip_controller.yaml" command="load"/>
+  <rosparam file="$(find hera_control)/config/kinect_controller.yaml" command="load"/>
 
   <!-- publishers -->
   <include file="$(find hera_control)/launch/manip_controller.launch"/>
+  <include file="$(find hera_control)/launch/kinect_controller.launch"/>
 
   <!-- spawn simulated robot -->
   <node name="spawn_robot" pkg="gazebo_ros" type="spawn_model"
