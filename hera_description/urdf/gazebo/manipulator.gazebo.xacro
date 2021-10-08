@@ -111,6 +111,8 @@
       </joint>
     </transmission>
 
+<!--##################### Kinect ########################-->
+
     <transmission name="kinect_trans">
       <type>transmission_interface/SimpleTransmission</type>
       <actuator name="torso_to_torso_sensor_plat_motor" >
