@@ -99,7 +99,7 @@
       <actuator name="gripper_left_finger_trans_motor" >
       </actuator>
       <joint name="gripper_left_finger_joint">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
     </transmission>
     <transmission name="gripper_right_finger_trans">
@@ -107,7 +107,7 @@
       <actuator name="gripper_right_finger_motor" >
       </actuator>
       <joint name="gripper_right_finger_joint">
-        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
       </joint>
     </transmission>
 
@@ -129,6 +129,29 @@
         <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
         </plugin>
     </gazebo>
+
+    <xacro:macro name="mimic_joint_plugin_gazebo" params="parent_joint mimic_joint has_pid:=false multiplier:=1.0 offset:=0 sensitiveness:=0.0 max_effort:=200.0 robot_namespace:=''">
+      <gazebo>
+          <plugin name="${mimic_joint}_mimic_joint_plugin" filename="libroboticsgroup_gazebo_mimic_joint_plugin.so">
+              <joint>${parent_joint}</joint>
+              <mimicJoint>${mimic_joint}</mimicJoint>
+              <xacro:if value="${has_pid}">
+              <hasPID />
+              </xacro:if>
+              <multiplier>${multiplier}</multiplier>
+              <offset>${offset}</offset>
+              <sensitiveness>${sensitiveness}</sensitiveness>
+              <maxEffort>${max_effort}</maxEffort>
+              <xacro:unless value="${robot_namespace == ''}">
+                  <robotNamespace>($robot_namespace)</robotNamespace>
+              </xacro:unless>
+          </plugin>
+      </gazebo>
+    </xacro:macro>
+
+    <xacro:mimic_joint_plugin_gazebo parent_joint="gripper_left_finger_joint"
+      mimic_joint="gripper_right_finger_joint" has_pid="false" multiplier="1.0"
+      max_effort="200.0" />
 
 <!--##################### GRASP FIX ########################-->
     <gazebo>
