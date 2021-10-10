@@ -24,18 +24,28 @@ arm_controller:
   state_publish_rate:  25
   action_monitor_rate: 10
 
-gripper_controller:
-  type: position_controllers/JointTrajectoryController
-  joints:
-    - gripper_right_finger_joint
-    - gripper_left_finger_joint
-  constraints:
-      goal_time: 0.6
-      stopped_velocity_tolerance: 0.05
-      gripper_right_finger_joint: {trajectory: 10, goal: 10}
-      gripper_left_finger_joint: {trajectory: 10, goal: 10}
-  stop_trajectory_duration: 0.5
-  state_publish_rate:  25
-  action_monitor_rate: 10
+gripper_r_controller:
+  type: effort_controllers/JointPositionController
+  joint: gripper_right_finger_joint
+  pid: {p: 200.0, i: 0.0, d: 0.0}
+
+gripper_l_controller:
+  type: effort_controllers/JointPositionController
+  joint: gripper_left_finger_joint
+  pid: {p: 200.0, i: 0.0, d: 0.0} 
+
+# gripper_controller:
+#   type: position_controllers/JointTrajectoryController
+#   joints:
+#     - gripper_right_finger_joint
+#     - gripper_left_finger_joint
+#   constraints:
+#       goal_time: 0.6
+#       stopped_velocity_tolerance: 0.05
+#       gripper_right_finger_joint: {trajectory: 10, goal: 10}
+#       gripper_left_finger_joint: {trajectory: 10, goal: 10}
+#   stop_trajectory_duration: 0.5
+#   state_publish_rate:  25
+#   action_monitor_rate: 10
 
 
