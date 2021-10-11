@@ -215,7 +215,7 @@
       <parent link="wrist_pan_link" />
       <child link="wrist_lift_link" />
       <axis xyz="0 -1 0" />
-      <limit lower="-2.6232" upper="1.8262" effort="0" velocity="5" />
+      <limit lower="-0.4" upper="3.1415" effort="0" velocity="5" />
     </joint>
   </xacro:macro>
 

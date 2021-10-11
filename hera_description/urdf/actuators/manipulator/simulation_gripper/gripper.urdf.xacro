@@ -131,7 +131,7 @@
     <parent link="${name}_link" />
     <child link="${name}_left_finger_link" />
     <axis xyz="-1 0 0" />
-    <limit effort="10.0" lower="0" upper="0.055" velocity="1" />
+    <limit effort="10.0" lower="0" upper="0.075" velocity="1" />
     <!-- <calibration rising="0.0" /> -->
     <dynamics damping="1" friction="1" />
     <!-- <safety_controller k_position="20"

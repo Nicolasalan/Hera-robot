@@ -69,6 +69,17 @@
       </actuator>
     </transmission>
 
+    <transmission name="trans_7">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="manip_support_joint">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="manip_support_motor">
+        <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+
 <!--##################### GRIPPER ########################-->
     <!-- <transmission name="trans_7">
       <type>transmission_interface/SimpleTransmission</type>
