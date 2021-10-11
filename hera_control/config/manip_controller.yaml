@@ -11,6 +11,7 @@ arm_controller:
     - elbow_lift_joint
     - wrist_pan_joint
     - wrist_lift_joint
+    - manip_support_joint
   constraints:
       goal_time: 0.6
       stopped_velocity_tolerance: 0.05
@@ -20,6 +21,7 @@ arm_controller:
       elbow_lift_joint: {trajectory: 10, goal: 10}
       wrist_pan_joint: {trajectory: 10, goal: 10}
       wrist_lift_joint: {trajectory: 10, goal: 10}
+      manip_support_joint: {trajectory: 10, goal: 10}
   stop_trajectory_duration: 0.5
   state_publish_rate:  25
   action_monitor_rate: 10
@@ -33,6 +35,8 @@ gripper_l_controller:
   type: effort_controllers/JointPositionController
   joint: gripper_left_finger_joint
   pid: {p: 200.0, i: 0.0, d: 0.0} 
+
+
 
 # gripper_controller:
 #   type: position_controllers/JointTrajectoryController
