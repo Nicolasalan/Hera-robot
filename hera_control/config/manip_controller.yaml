@@ -1,10 +1,11 @@
 joint_state_controller:
-  type: joint_state_controller/JointStateController
-  publish_rate: 100
+  type: joint_state_controller/JointStateController # Esse plugin fornece o estado das juntas, publicando-as em um tópico chamado /joint_states
+  publish_rate: 100 # taxa de publicação em Hz
 
 arm_controller:
-  type: position_controllers/JointTrajectoryController
-  joints:
+  # Usado quando você deseja enviar comandos para uma interface de posição. Isso significa que as juntas que você deseja controlar aceitam comandos de posição.
+  type: position_controllers/JointTrajectoryController # Esse plugin fornece controle de posição para juntas
+  joints: # nomes das juntas que você deseja controlar
     - shoulder_pan_joint
     - shoulder_lift_joint
     - elbow_pan_joint
@@ -27,9 +28,9 @@ arm_controller:
   action_monitor_rate: 10
 
 gripper_r_controller:
-  type: effort_controllers/JointPositionController
-  joint: gripper_right_finger_joint
-  pid: {p: 200.0, i: 0.0, d: 0.0}
+  type: effort_controllers/JointPositionController # plugin effort_controllers que aceita comandos de posição como entrada
+  joint: gripper_right_finger_joint # nome da junta que será controlada
+  pid: {p: 200.0, i: 0.0, d: 0.0} # 
 
 gripper_l_controller:
   type: effort_controllers/JointPositionController

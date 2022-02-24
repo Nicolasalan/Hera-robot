@@ -1,7 +1,9 @@
 <launch>
 
-  <!-- Load configuration file -->
+  <!-- carregar o arquivo de controle -->
   <rosparam file="$(find hera_control)/config/manip_controller.yaml" command="load"/>
+
+  <!-- iniciar os controladores de posição conjunta executando um script python que faz uma chamada de serviço para o gerenciador do controlador ros_control-->
 
   <!-- Start joint state controller -->
   <node name="joint_state_controller_spawner" pkg="controller_manager" type="controller_manager" output="screen"
@@ -10,6 +12,8 @@
   <!-- Start arm controller -->
   <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="spawn arm_controller gripper_r_controller gripper_l_controller"/>
 
+  <!-- iniciando um nó robot_state_publisher que simplesmente escuta as mensagens /joint_states do joint_state_controller e, em seguida, publica as transformações em /tf. Isso permite ver o robô simulado no RVIZ,-->
+  
   <!-- start robot state publisher -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
     respawn="false" output="screen">

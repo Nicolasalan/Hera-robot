@@ -1,12 +1,11 @@
-kinect_state_controller:
-  type: joint_state_controller/JointStateController
-  publish_rate: 50
+hera:
+  # joint_state_controller: Este plugin fornece o estado das juntas, publicando-as em um tópico chamado /joint_states
+  kinect_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
 
-kinect_controller:
-  type: position_controllers/JointPositionController
-  joint: joint_torso_to_torso_sensor_plat
-  pid: {p: 20.0, i: 0.0, d: 0.0}
-
-  
-  # Position Controllers ---------------------------------------
-  
+  # position_controllers: Usado quando você deseja enviar comandos para uma interface de posição. Isso significa que as juntas que você deseja controlar aceitam comandos de posição.
+  kinect_controller:
+    type: position_controllers/JointPositionController
+    joint: joint_torso_to_torso_sensor_plat
+    pid: {p: 20.0, i: 0.0, d: 0.0}  
