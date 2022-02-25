@@ -59,6 +59,8 @@
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
+    <!-- Esta linha indica que nosso pacote fornecerá um plugin. Isso é muito importante porque se não adicionarmos essa linha, o gerenciador do controlador não poderá encontrar nosso novo controlador e carregá-lo.-->
+    <controller_interface plugin="${prefix}/controller_plugins.xml"/>
     <!-- Other tools can request additional information be placed here -->
 
   </export>
