@@ -1,0 +1,6 @@
+<!-- Indica o caminho onde a biblioteca será colocada quando compilarmos o controlador, assim como o nome, tipo e classe do controlador.-->
+<library path="lib/libmy_controller_lib">
+  <class name="my_controller/PositionController" 
+         type="controller_ns::PositionController"           
+         base_class_type="controller_interface::ControllerBase" />
+</library>
