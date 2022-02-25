@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<launch>
+
+  <arg name="controller_to_spawn" default="" />
+  <arg name="controllers_yaml" default="rrbot_controllers" />
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find rrbot_description)/urdf/rrbot_robot.urdf.xacro'" />
+
+  <node name="hera_hardware_interface" pkg="hera_hardware_interface" type="hera_hardware_interface">
+    <!-- Load standard controller joint names from YAML file to parameter server -->
+    <rosparam command="load" file="$(find rrbot_bringup)/config/joint_names.yaml" />
+  </node>
+
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam command="load" file="$(find rrbot_bringup)/config/$(arg controllers_yaml).yaml" />
+
+  <!-- Load robot state publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <param name="ignore_timestamp" type="bool" value="true"/>
+  </node>
+
+  <!-- Load controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+      args="joint_state_controller $(arg controller_to_spawn)"/>
+
+  <node name="view_rrbot" pkg="rviz" type="rviz" args="-d $(find rrbot_description)/rviz/rrbot.rviz" />
+
+</launch>

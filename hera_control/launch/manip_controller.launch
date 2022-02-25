@@ -10,7 +10,8 @@
     args="spawn joint_state_controller" respawn="false"/>
   
   <!-- Start arm controller -->
-  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="spawn arm_controller gripper_r_controller gripper_l_controller"/>
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" 
+    args="spawn arm_controller gripper_r_controller gripper_l_controller"/>
 
   <!-- iniciando um nó robot_state_publisher que simplesmente escuta as mensagens /joint_states do joint_state_controller e, em seguida, publica as transformações em /tf. Isso permite ver o robô simulado no RVIZ,-->
   
@@ -22,5 +23,11 @@
   <!-- start fake calibration -->
   <node pkg="rostopic" type="rostopic" name="fake_joint_calibration"
         args="pub /calibrated std_msgs/Bool true" />
+  </node>
+  <!-- inicie um nó robot_state_publisher que escute as mensagens /joint_states do joint_state_controller e, em seguida, publique as transmissões em /tf -->
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">    
+    <param name="publish_frequency" type="double" value="100.0" />
+    <param name="tf_prefix" type="string" value="" />
+</node>
 
 </launch>

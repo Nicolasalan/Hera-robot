@@ -822,6 +822,9 @@
       </geometry>
     </collision>
   </link>
+
+  <!-- Gazebo -->
+  <!-- Este plugins lê as informações contidas nas tags de transmissão para que o Gazebo entenda. Ao carregar este plug-in, você sempre deve adicionar uma tag de plug-in indicando o nome do plug-in e o nome do arquivo que o contém.-->
   <gazebo reference="gripper_link">
     <material>Gazebo/White</material>
   </gazebo>
@@ -1094,7 +1097,7 @@
       </plugin>
     </sensor>
   </gazebo>
-  <!--################################################################################################-->
+  <!--############################################## transmission ####################################-->
   <!-- Os elementos de transmissão são usados para descrever a relação entre uma junta e um atuador.  -->
   <!--################################################################################################-->
 
@@ -1112,6 +1115,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
+
   <transmission name="trans_2">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="shoulder_lift_joint">
@@ -1122,6 +1126,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
+
   <transmission name="trans_3">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="elbow_pan_joint">
@@ -1132,6 +1137,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
+
   <transmission name="trans_4">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="elbow_lift_joint">
@@ -1142,6 +1148,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
+
   <transmission name="trans_5">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="wrist_pan_joint">
@@ -1151,6 +1158,7 @@
       <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
+
   </transmission>
   <transmission name="trans_6">
     <type>transmission_interface/SimpleTransmission</type>
@@ -1162,6 +1170,7 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
+
   <transmission name="trans_7">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="manip_support_joint">
@@ -1203,6 +1212,7 @@
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
+
   <transmission name="gripper_right_finger_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <actuator name="gripper_right_finger_motor">
@@ -1211,6 +1221,7 @@
       <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
     </joint>
   </transmission>
+
   <!--##################### Kinect ########################-->
   <transmission name="kinect_trans">
     <type>transmission_interface/SimpleTransmission</type>
@@ -1221,7 +1232,7 @@
     </joint>
   </transmission>
   <!--#####################################################################-->
-  <!--#####################      ROS CONTROL     ##########################-->
+  <!--#####################  ROS CONTROL  GAZEBO ##########################-->
   <!--adicionar o plug-in de controle do gazebo ros aos seus arquivos URDF.-->
   <!--#####################################################################-->
 
@@ -1233,6 +1244,7 @@
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
     </plugin>
   </gazebo>
+  
     <plugin filename="libroboticsgroup_gazebo_mimic_joint_plugin.so" name="gripper_right_finger_joint_mimic_joint_plugin">
       <joint>gripper_left_finger_joint</joint>
       <mimicJoint>gripper_right_finger_joint</mimicJoint>
@@ -1242,6 +1254,7 @@
       <maxEffort>200.0</maxEffort>
     </plugin>
   </gazebo>
+
   <!--##################### GRASP FIX ########################-->
   <gazebo>
     <plugin filename="libgazebo_grasp_fix.so" name="gazebo_grasp_fix">
