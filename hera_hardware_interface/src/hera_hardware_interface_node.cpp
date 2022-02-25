@@ -14,7 +14,7 @@ int main(int argc, char** argv)
      ros::NodeHandle root_nh;
      ros::NodeHandle robot_nh("~");
 
-     hera_hardware_interface::RRBotHardwareInterface hera_hardware_interface;
+     hera_hardware_interface::HeraHardwareInterface hera_hardware_interface;
      controller_manager::ControllerManager controller_manager(&hera_hardware_interface, root_nh);
 
      //Configura temporizadores

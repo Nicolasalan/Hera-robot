@@ -10,7 +10,7 @@
 
 namespace rrbot_hardware_interface
 {
-class HeraHardwareInterface : public hardware_interface::Hera
+class HeraHardwareInterface : public hardware_interface::RobotHW
 {
 public:
   // três funções principais para usar na interface:
