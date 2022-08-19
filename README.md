@@ -1,4 +1,4 @@
-# hera_robot
+# Hera Robot
 
 ## Instalação
 1. Clone este repositório.
@@ -49,7 +49,3 @@ roslaunch hera_description visualize_model.launch
                ```
                rostopic list /joint_states
                ```
-
-## Usage
-
-## 
