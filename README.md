@@ -22,30 +22,3 @@ source devel/setup.bash
 ```
 roslaunch hera_description visualize_model.launch
 ```
-
-
-## Hera Robot
-
-* ### Hera Description
-
-* ### Hera Control
-
-     * ### Controladores 
-          * #### Kinect
-               Inicializar Kinect:
-               ```
-               roslaunch hera_control kinect_controller.launch
-               ```
-               Use a rostopic list para ver os controles disponíveis:
-               ```
-               rostopic list /joint_states
-               ```
-          * #### manipulator
-               Inicializar manipulator:
-               ```
-               roslaunch hera_control manip_controller.launch
-               ```
-               Use a rostopic list para ver os controles disponíveis:
-               ```
-               rostopic list /joint_states
-               ```
