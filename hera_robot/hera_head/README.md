@@ -1,5 +1,3 @@
-# Head
+Pacote para a cabeça da HERA
 
-Package for HERA's head
-
-The same pkg found in "dev" branch, but with the TF in a python script
+O mesmo pacote encontrado no branch "dev", mas com o TF em um script python
